@@ -20,7 +20,7 @@ msgstr "复制"
 # b4ff2fb5360446358d1192ee6bda55d6
 #: ../source/replication.txt
 msgid "On this page"
-msgstr ""
+msgstr "在本页面"
 
 # dc38207eb40d440ca1a257bfca0d878c
 #: ../source/replication.txt:13
@@ -31,21 +31,25 @@ msgid ""
 "section introduces replication in MongoDB as well as the components and "
 "architecture of replica sets. The section also provides tutorials for "
 "common tasks related to replica sets."
-msgstr ""
+"msgstr "MongoDB中的副本集是一组维护相同数据集的mongod进程。"
+"副本集起到冗余和高可用性作用，是所有生产部署的基础。"
+"本节介绍MongoDB中的复制以及副本集的组件和体系结构。"
+"该部分还提供了与副本集相关的常见tasks的教程。"
 
 # 067eec07b0f74a529b2cf05ca209e319
 #: ../source/replication.txt:21
 msgid "Redundancy and Data Availability"
-msgstr ""
+msgstr "冗余和数据可用性"
 
 # 8e26c8582f6041a7975071aedf01e160
 #: ../source/replication.txt:23
-msgid ""
+msgid "冗余及高可用"
 "Replication provides redundancy and increases data availability. With "
 "multiple copies of data on different database servers, replication "
 "provides a level of fault tolerance against the loss of a single database"
 " server."
-msgstr ""
+msgstr "复制集提供冗余并提高数据可用性。"
+"通过在不同数据库服务器上提供多个数据副本，复制集可提供一定级别的容错功能，以防止丢失单个数据库服务器。"
 
 # de1f301cec014ee698afa3f90b497a16
 #: ../source/replication.txt:28
@@ -56,12 +60,14 @@ msgid ""
 "availability for distributed applications. You can also maintain "
 "additional copies for dedicated purposes, such as disaster recovery, "
 "reporting, or backup."
-msgstr ""
+msgstr "在某些情况下，复制可以提供提高的读取性能，因为客户端可以将读取操作发送到不同的服务，"
+"在不同数据中心维护数据副本可以增加分布式应用程序的数据locality和可用性。"
+"您还可以为专用的目的而维护其他副本，例如灾难恢复，报告或备份。"
 
 # fe567b42400b414abb7fc87259fcb400
 #: ../source/replication.txt:36
 msgid "Replication in MongoDB"
-msgstr ""
+msgstr "MongoDB中的复制集"
 
 # 14b95ee753384260bfdf664a45753dd8
 #: ../source/replication.txt:38
@@ -71,7 +77,9 @@ msgid ""
 "optionally one arbiter node. Of the data bearing nodes, one and only one "
 "member is deemed the primary node, while the other nodes are deemed "
 "secondary nodes."
-msgstr ""
+msgstr "副本集是一组维护相同数据集的mongod实例。"
+"副本集包含多个数据节点和可选的一个仲裁节点。"
+"在数据的节点中，一个且仅一个成员被视为主节点，而其他节点被视为次要节点。"
 
 # 2a23bb7ecb354da7a177e4dc10174aab
 #: ../source/replication.txt:44
@@ -84,7 +92,10 @@ msgid ""
 " The primary records all changes to its data sets in its operation log, "
 "i.e. :doc:`oplog </core/replica-set-oplog>`. For more information on "
 "primary node operation, see :doc:`/core/replica-set-primary`."
-msgstr ""
+msgstr "主节点接收所有写操作。副本集只能有一个primary主节点能够确认具有{w：“most”}写入;"
+"虽然在某些情况下，另一个mongod实例可能暂时认为自己也是primary主节点。"
+"[1]主要记录其操作日志中的数据集的所有更改，即oplog。"
+"有关主节点操作的更多信息，请参阅:doc:`/core/replica-set-primary`."
 
 # f187722bb71f48edb247d280e79e0802
 #: ../source/replication.txt:56
@@ -95,7 +106,9 @@ msgid ""
 " unavailable, an eligible secondary will hold an election to elect itself"
 " the new primary. For more information on secondary members, see "
 ":doc:`/core/replica-set-secondary`."
-msgstr ""
+msgstr "secondaries次节点复制主节点的oplog并将操作应用于其数据集，以使secondaries次节点"
+"的数据集对应上主节点的数据集。如果primary主节点不在，则符合条件的secondaries次节点将举行选"
+"举以选出新的primary主节点。有关辅助成员的更多信息，请参阅:doc:`/core/replica-set-secondary`."
 
 # f1504c61d76e4be2b83e0d090c64669c
 #: ../source/replication.txt:65
@@ -111,7 +124,11 @@ msgid ""
 "majority of votes in an election for primary. Arbiters do not require "
 "dedicated hardware. For more information on arbiters, see :doc:`/core"
 "/replica-set-arbiter`."
-msgstr ""
+msgstr "您可以将额外的:program:`mongod`实例添加到副本集作为:doc:`arbiter </core/replica-set-arbiter>`仲裁节点。"
+"仲裁节点不维护数据集。仲裁节点的目的是通过响应其他副本集成员的心跳和选举请求来维护副本集中的仲裁。"
+"因为它们不存储数据集，所以仲裁节点可以是提供副本集仲裁功能的好方法，其资源成本比具有数据集的全"
+"功能副本集成员更低。如果您的副本集具有偶数个成员，请添加仲裁节点以获得主要选举中的大多数投票。"
+"仲裁者不需要专用硬件。有关仲裁器的更多信息，请参阅:doc:`/core/replica-set-arbiter`"
 
 # 0968777371844de4a798b2939722f57a
 #: ../source/replication.txt:79
@@ -121,12 +138,12 @@ msgid ""
 "become a :doc:`secondary </core/replica-set-secondary>` and a "
 ":doc:`secondary </core/replica-set-secondary>` may become the primary "
 "during an election."
-msgstr ""
+msgstr "仲裁节点将始终是仲裁节点，而primary主节点可能会退出并成为Secondaries次节点，而Secondaries次节点可能成为选举期间的主节点。"
 
 # df8e7e511c55495aad625b76211a2895
 #: ../source/replication.txt:88
 msgid "Asynchronous Replication"
-msgstr ""
+msgstr "异步复制"
 
 # 63283bac74ea46959504f86b8af1ff0d
 #: ../source/replication.txt:90
@@ -135,12 +152,14 @@ msgid ""
 " operations after the primary, sets can continue to function despite the "
 "failure of one or more members. For more information on replication "
 "mechanics, see :ref:`replica-set-oplog` and :ref:`replica-set-sync`."
-msgstr ""
+msgstr "Secondaries次节点异步应用primary主节点的操作。"
+"通过在primary主节点之后应用操作，就算一个或多个节点失败，但集合仍可继续运行。"
+"有关复制机制的更多信息，请参阅:ref:`replica-set-oplog` and :ref:`replica-set-sync`."
 
 # e01bffbbc6284cc69d3311a3aa3ff17c
 #: ../source/replication.txt:99
 msgid "Automatic Failover"
-msgstr ""
+msgstr "自动故障转移"
 
 # 02728e00e55f436aa783b5aa4c39cfaa
 #: ../source/replication.txt:101
@@ -149,7 +168,8 @@ msgid ""
 " more than 10 seconds, an eligible secondary will hold an election to "
 "elect itself the new primary. The first secondary to hold an election and"
 " receive a majority of the members' votes becomes primary."
-msgstr ""
+msgstr "如果primary主节点不与该组其他成员通信超过10秒，则符合条件的节点将举行选举以选出新的primary主节点。"
+"举行选举并获得大多数成员投票的第一个节点成为primary主节点。"
 
 # 4304b1c490894dc6a1e673b4644641b2
 #: ../source/includes/fact-replica-set-protocolVersion1.rst:3
@@ -160,7 +180,9 @@ msgid ""
 "primaries. New replica sets will, by default, use "
 ":rsconf:`protocolVersion: 1 <protocolVersion>`. Previous versions of "
 "MongoDB use version 0 of the protocol."
-msgstr ""
+msgstr "MongoDB引入了复制协议的第1版(:rsconf:`protocolVersion: 1 <protocolVersion>`)，"
+"以减少副本集故障转移时间并加速多个同时的检测。"
+"默认情况下，新的副本集将使用protocolVersion：1。早期版本的MongoDB使用协议的版本0。"
 
 # 0e55e08f1182488282a8dbc756ba1fbb
 #: ../source/replication.txt:110
@@ -171,7 +193,10 @@ msgid ""
 ":rsconf:`~settings.electionTimeoutMillis`). One of the remaining "
 "secondaries holds an :term:`election` to elect itself as a new primary. "
 "The election itself may take another 10-30 seconds."
-msgstr ""
+msgstr "虽然时间变化，但故障转移过程通常在一分钟内完成。"
+"例如，副本集的成员可能需要10-30秒才能声明primary主节点不可访问（请参阅:rsconf:`~settings.electionTimeoutMillis`）。"
+"剩下的第二个选举其一，选举自己为新的primary主节点。"
+"选举本身可能还需要10-30秒。"
 
 # 0c30aba9b88649d6a266fbc28bb1a39a
 #: ../source/replication.txt:119
@@ -180,19 +205,21 @@ msgid ""
 " <3.2-rel-notes-rs-enhancements>`, MongoDB reduces replica set failover "
 "time. See :ref:`replication election enhancements <3.2-rel-notes-rs-"
 "enhancements>` for details."
-msgstr ""
+msgstr "从MongoDB 3.2开始，通过复制选举增强功能，MongoDB可以减少副本集故障转移时间。"
+"有关详细信息，请参阅:ref:`replication election enhancements <3.2-rel-notes-rs-"
+"enhancements>`"
 
 # 26458922e6994984944811018b3384e8
 #: ../source/replication.txt:124
 msgid ""
 "See :ref:`replica-set-elections` and :ref:`replica-set-rollbacks` for "
 "more information."
-msgstr ""
+msgstr "更多信息"
 
 # 699b08d5de0c4082b2952603c84993f8
 #: ../source/replication.txt:128
 msgid "Read Operations"
-msgstr ""
+msgstr "读取操作"
 
 # 0327a8e9b77743d3b5b8c40114263246
 #: ../source/replication.txt:130
@@ -204,14 +231,17 @@ msgid ""
 "from secondaries may return data that does not reflect the state of the "
 "data on the primary. For information on reading from replica sets, see "
 ":doc:`/core/read-preference`."
-msgstr ""
+msgstr "默认情况下，客户端从primary主节点[1]读取;"
+"但是，客户端可以指定读取首选项以将读取操作发送到Secondaries次节点。"
+"对Secondaries次节点的异步复制意味着从Secondaries次节点读取可能会返回不反映主节点"
+"上数据状态的数据。有关从副本集读取的信息，请参阅:doc:`/core/read-preference`."
 
 # 21659562f35e41d1ac9c2db6a24e6167
 #: ../source/includes/extracts/concurrent-operations-read-uncommitted.rst:1
 msgid ""
 "In MongoDB, clients can see the results of writes before the writes are "
 ":term:`durable`:"
-msgstr ""
+msgstr "在MongoDB中，客户端可以在写入持久化之前查看写入结果："
 
 # 110ac3ab1a864a379805d62c50f4ae6f
 #: ../source/includes/list-visibility-of-data.rst:1
@@ -220,7 +250,8 @@ msgid ""
 "clients using :readconcern:`\"local\"` (i.e. the default) readConcern can"
 " see the result of a write operation before the write operation is "
 "acknowledged to the issuing client."
-msgstr ""
+msgstr "无论写入问题如何，使用:readconcern:`\"local\"（即默认）readConcer的其他客"
+"户端可以在向发布客户端确认写入操作之前看到写入操作的结果。"
 
 # 3abb9853e7db48e1918b52bff3dd2119
 #: ../source/includes/list-visibility-of-data.rst:6
@@ -228,19 +259,19 @@ msgid ""
 "Clients using :readconcern:`\"local\"` (i.e. the default) readConcern can"
 " read data which may be subsequently :doc:`rolled back </core/replica-"
 "set-rollbacks>`."
-msgstr ""
+msgstr "使用:readconcern:`\"local\"（即默认）readConcer的客户端可以读取可能随后回滚的数据。"
 
 # b99e08dfa2174f559109fdf721a30042
 #: ../source/replication.txt:140
 msgid ""
 "For more information on read isolations, consistency and recency for "
 "MongoDB, see :doc:`/core/read-isolation-consistency-recency`."
-msgstr ""
+msgstr "有关MongoDB的读取分离，一致性和及时性的更多信息，请参阅 :doc:`/core/read-isolation-consistency-recency`."
 
 # d9d8f249139649fbb065a8960a27805b
 #: ../source/replication.txt:144
 msgid "Additional Features"
-msgstr ""
+msgstr "附加功能"
 
 # e410f42e918b4082854f2a0af3753c0a
 #: ../source/replication.txt:146
@@ -251,7 +282,9 @@ msgid ""
 "distributed>`, or control the outcome of elections by adjusting the "
 ":rsconf:`members[n].priority` of some members. Replica sets also support "
 "dedicated members for reporting, disaster recovery, or backup functions."
-msgstr ""
+msgstr "副本集提供了许多选项来支持应用程序需求。"
+"例如，您可以部署包含多个数据中心成员的副本集，或通过调整某些成员的成员:rsconf:`members[n].priority`"
+"来控制选举结果。副本集还支持设置报告，灾难恢复或备份功能的专用成员。"
 
 # 3d361b15801f4f4ebfb8ec211a8e8e23
 #: ../source/replication.txt:155
@@ -273,16 +306,20 @@ msgid ""
 "When this occurs, clients that connect to the former primary may observe "
 "stale data despite having requested read preference :readmode:`primary`, "
 "and new writes to the former primary will eventually roll back."
-msgstr ""
+msgstr "在 :ref:`some circumstances <edge-cases>`，副本集中的两个节点可能会暂时认"
+"为它们是primary主节点，但最多其中一个节点将能够完成写入{w：“most”}写入问题。"
+"可以完成{w：“most”}写入的节点是当前primary主节点点，而另一节点是尚未识别其降级"
+"的前primary主节点，通常是由于网络分区。发生这种情况时，连接到前一个主服务器的客户端"
+"可能会观察过时数据，尽管已请求读取首选项主要，并且对前一个primary主节点的新写入最终将回滚。"
 
 #~ msgid ":doc:`/core/replication-introduction`"
-#~ msgstr ""
+#~ msgstr ":doc:`/core/replication-introduction`"
 
 #~ msgid "An introduction to replica sets,  their behavior, operation, and use."
-#~ msgstr ""
+#~ msgstr "介绍副本集，其行为，操作和使用"
 
 #~ msgid ":doc:`/core/replication`"
-#~ msgstr ""
+#~ msgstr ":doc:`/core/replication`"
 
 #~ msgid ""
 #~ "The core documentation of replica set"
@@ -291,13 +328,13 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid ":doc:`/core/replica-set-members`"
-#~ msgstr ""
+#~ msgstr ":doc:`/core/replica-set-members`"
 
 #~ msgid "Introduces the components of replica sets."
-#~ msgstr ""
+#~ msgstr "介绍副本集的组件。"
 
 #~ msgid ":doc:`/core/replica-set-architectures`"
-#~ msgstr ""
+#~ msgstr ":doc:`/core/replica-set-architectures`"
 
 #~ msgid ""
 #~ "Introduces architectural considerations related "
